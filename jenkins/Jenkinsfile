@@ -1,0 +1,60 @@
+# jenkins/Jenkinsfile
+pipeline {
+    agent any
+    
+    environment {
+        VENV_DIR = 'venv'
+    }
+    
+    triggers {
+        githubPush()
+    }
+    
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/yashraj7878/DevOps_Internship_Challenge/blob/main/Flask_app.git'
+            }
+        }
+        
+        stage('Setup Dependencies') {
+            steps {
+                sh '''
+                python3 -m venv $VENV_DIR
+                source $VENV_DIR/bin/activate
+                pip install -r requirements.txt
+                '''
+            }
+        }
+        
+        stage('Restart Service') {
+            steps {
+                sh 'sudo systemctl restart flask_app'
+            }
+        }
+        
+        stage('Test Application') {
+            steps {
+                sh 'curl -s http://localhost:5000/'
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed! Check logs.'
+        }
+    }
+}
+// This Jenkinsfile automates the deployment of a Flask application.
+// It includes stages for cloning the repository, setting up dependencies, restarting the service, and testing the application.
+// The pipeline is triggered by a GitHub push event.
+// The application is expected to be running on a server with systemd, and the service name is assumed to be 'flask_app'.
+// Make sure to adjust the repository URL and service name as per your setup.
+// The pipeline uses a virtual environment to manage Python dependencies.
+// The test stage sends a request to the application to ensure it's running correctly.
+// Ensure that the Jenkins server has the necessary permissions to restart the service and access the repository.
+// This Jenkinsfile is a basic example and can be extended with additional stages for linting, testing, etc.    
