@@ -3,6 +3,7 @@
 ## Project Overview
 This project demonstrates a full DevOps pipeline utilizing **Proxmox, Terraform, Jenkins, Flask, Prometheus, and automation**. The goal is to create an automated and monitored infrastructure with a simple Flask application, automated CI/CD, and monitoring.
 
+![Architecture Diagram](p.png)
 
 ## **1. Proxmox Setup**
 
