@@ -165,11 +165,7 @@ repo/
 ├── monitoring/
 ├── crontab/
 ```
-### **Include:**
-- **Setup instructions** (infrastructure, app, Jenkins, monitoring)
-- **Architecture explanation**
-- **Prometheus dashboard screenshots** (if available)
-- **Jenkins build logs/screenshots**
+
 
 ## **📌 Conclusion**
 This project demonstrates a complete DevOps pipeline covering infrastructure provisioning, application deployment, automation, CI/CD, and monitoring. 🚀
